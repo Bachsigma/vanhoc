@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bingo kiến thức ôn tập văn bản Vợ nhặt - Ngữ văn 11 Kết nối tri thức" />
+  <title>Bingo kiến thức | Vợ nhặt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Bingo kiến thức">
+        <span class="brand-mark">B</span>
+        <span><strong>BINGO</strong><small>KIẾN THỨC</small></span>
+      </a>
+      <div class="lesson-tag"><span class="status-dot"></span> Ngữ văn 11 · Kết nối tri thức</div>
+    </header>
+
+    <main id="top">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">Ôn tập văn bản</p>
+          <h1 id="page-title">Vợ nhặt</h1>
+          <p class="intro-text">Lật mở những mảnh ghép của câu chuyện giữa nạn đói. Mỗi gợi ý chỉ dẫn đến một ô duy nhất.</p>
+        </div>
+        <div class="paper-note" aria-label="Mục tiêu trò chơi">
+          <span class="note-pin"></span>
+          <strong>Tạo một hàng BINGO</strong>
+          <span>ngang · dọc · chéo</span>
+        </div>
+      </section>
+
+      <section class="player-bar" aria-label="Thông tin người chơi">
+        <label class="field"><span>Họ tên</span><input id="studentName" type="text" placeholder="Nhập tên của em" autocomplete="name" /></label>
+        <label class="field small-field"><span>Lớp</span><input id="studentClass" type="text" placeholder="11..." /></label>
+        <div class="mode-picker">
+          <span class="field-label">Chế độ</span>
+          <div class="mode-buttons" role="group" aria-label="Chọn chế độ chơi">
+            <button class="mode-button active" data-mode="keywords" type="button">🎯 Từ khóa</button>
+            <button class="mode-button" data-mode="concepts" type="button">📖 Khái niệm</button>
+            <button class="mode-button" data-mode="matching" type="button">🧩 Ghép kiến thức</button>
+            <button class="mode-button disabled" type="button" title="Tài liệu không có dữ liệu âm thanh">🔊 Nghe – chọn</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="game-layout" aria-label="Khu vực chơi Bingo">
+        <div class="board-panel">
+          <div class="board-heading">
+            <div>
+              <p class="section-kicker">Bảng của em</p>
+              <h2>Chọn ô đúng với gợi ý</h2>
+            </div>
+            <div class="bingo-counter"><span id="correctCount">0</span><small>/ 9 ô đúng</small></div>
+          </div>
+          <div id="bingoBoard" class="bingo-board" role="grid" aria-label="Bảng Bingo 3 nhân 3"></div>
+          <div class="board-footer">
+            <span class="legend"><i class="legend-swatch"></i> Ô đã chọn đúng</span>
+            <span id="boardHint">Bắt đầu để nhận gợi ý đầu tiên</span>
+          </div>
+        </div>
+
+        <aside class="clue-panel" aria-live="polite">
+          <div class="clue-topline"><span class="live-pip"></span><span id="roundLabel">SẴN SÀNG</span><span class="round-number" id="questionNumber">0 / 9</span></div>
+          <div class="clue-card">
+            <span class="clue-label">Gợi ý hiện tại</span>
+            <p id="clueText">Bấm “Bắt đầu” để mở câu hỏi đầu tiên.</p>
+            <div id="feedback" class="feedback" role="status"></div>
+          </div>
+          <div class="action-row">
+            <button id="startButton" class="primary-button" type="button"><span>▶</span> Bắt đầu</button>
+            <button id="hintButton" class="secondary-button" type="button" disabled><span>✦</span> Gợi ý</button>
+            <button id="nextButton" class="secondary-button" type="button" disabled><span>→</span> Câu tiếp theo</button>
+          </div>
+          <div class="stats-grid">
+            <div class="stat"><span>Đã thử</span><strong id="attemptCount">0</strong></div>
+            <div class="stat"><span>Đúng ngay</span><strong id="firstTryCount">0</strong></div>
+            <div class="stat"><span>Thời gian</span><strong id="timer">00:00</strong></div>
+            <div class="stat"><span>Trạng thái</span><strong id="statusText">Chưa chơi</strong></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="tips-strip" aria-label="Cách chơi">
+        <span class="tips-icon">i</span>
+        <p><strong>Cách chơi:</strong> Đọc gợi ý, chọn ô phù hợp. Chọn sai không bị trừ điểm — em sẽ nhận thêm một gợi ý nhỏ để thử lại.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>Học từ văn bản · Nhớ bằng kết nối</span><button id="resultButton" class="text-button" type="button" disabled>Xem kết quả <span>↗</span></button></footer>
+  </div>
+
+  <div id="bonusModal" class="modal-backdrop" hidden>
+    <section class="modal bonus-modal" role="dialog" aria-modal="true" aria-labelledby="bonusTitle">
+      <button class="close-button" data-close-modal type="button" aria-label="Đóng">×</button>
+      <div class="celebration-mark">✦</div>
+      <p class="eyebrow">Một hàng đã hoàn thành</p>
+      <h2 id="bonusTitle">BINGO BONUS</h2>
+      <p class="modal-lead">Ba ô này cùng mở ra một mạch ý về tình người trong hoàn cảnh khắc nghiệt.</p>
+      <div id="bonusItems" class="bonus-items"></div>
+      <label class="answer-label" for="bonusAnswer">Giải thích ngắn mối liên hệ</label>
+      <textarea id="bonusAnswer" rows="3" placeholder="Viết 1–2 câu của em..."></textarea>
+      <button id="submitBonus" class="primary-button full-button" type="button">Hoàn thành Bonus</button>
+      <p id="bonusFeedback" class="bonus-feedback"></p>
+    </section>
+  </div>
+
+  <div id="resultModal" class="modal-backdrop" hidden>
+    <section class="modal result-modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <button class="close-button" data-close-modal type="button" aria-label="Đóng">×</button>
+      <p class="eyebrow">Bản tổng kết của em</p>
+      <h2 id="resultTitle">KẾT QUẢ BINGO CỦA EM</h2>
+      <p id="resultGreeting" class="result-greeting"></p>
+      <div id="resultStats" class="result-stats"></div>
+      <div class="review-box"><span class="review-icon">↺</span><div><strong>Kiến thức cần xem lại</strong><p id="reviewText">Chưa có dữ liệu.</p></div></div>
+      <button id="playAgainButton" class="primary-button full-button" type="button">↻ Chơi lại</button>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
